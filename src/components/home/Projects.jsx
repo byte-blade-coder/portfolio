@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiClock, FiArrowUpRight } from "react-icons/fi";
 
 import project2 from "../../assets/projects/dental-clinic.png";
+import projectSalon from "../../assets/projects/salon.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,15 +23,24 @@ function Projects() {
       liveLink: "https://dental-clinic-theme.vercel.app/",
       desc: "A premium dental clinic website featuring modern UI, appointment booking, doctor profiles, and a stunning gallery — built with React and Tailwind CSS."
     },
+    {
+      id: 2,
+      title: "Salon Website",
+      category: "WordPress • Custom Theme • CSS",
+      image: projectSalon,
+      isComingSoon: false,
+      liveLink: "https://salon21.42web.io/",
+      desc: "A premium WordPress website featuring custom theme development, online booking, service catalogs, and an elegant luxury design tailored for modern salons."
+    },
     { 
-      id: 2, 
+      id: 3, 
       title: "Next-Gen SaaS", 
       category: "React • Node.js", 
       isComingSoon: true,
       desc: "Currently crafting a highly scalable SaaS platform with smart integrations and real-time data processing capabilities."
     },
     { 
-      id: 3, 
+      id: 4, 
       title: "Premium E-Commerce", 
       category: "Next.js • Tailwind", 
       isComingSoon: true,
@@ -107,21 +117,6 @@ function Projects() {
       );
     });
 
-    // Project image internal parallax
-    const images = gsap.utils.toArray(".project-image-parallax");
-    images.forEach((img) => {
-      gsap.to(img, {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: img.parentElement,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        }
-      });
-    });
-
   }, { scope: container });
 
   return (
@@ -167,7 +162,7 @@ function Projects() {
                         <img 
                           src={project.image} 
                           alt={project.title} 
-                          className="project-image-parallax absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
+                          className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
                         />
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
                       </div>
