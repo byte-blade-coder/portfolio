@@ -16,7 +16,7 @@ function About() {
   const storyTextRef = useRef(null);
   const bgTextRef = useRef(null);
 
-  const storyText = "I am a Full-Stack Architect with a passion for building software that matters. My mission is to bridge the gap between complex engineering and human-centric design, creating digital products that are as robust as they are intuitive.";
+  const storyText = "Byte Blade is a premium software engineering firm founded by Ahmed Raza. We specialize in building software that matters, bridging the gap between complex backend architectures and human-centric design to create digital products that are as robust as they are intuitive.";
 
   useGSAP(() => {
     // Scroll-scrubbed image reveal
@@ -96,18 +96,6 @@ function About() {
       }
     });
 
-    // Background Text Parallax
-    gsap.to(bgTextRef.current, {
-      xPercent: -30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
-
   }, { scope: container });
 
   const handleBtnHover = (e) => {
@@ -125,13 +113,6 @@ function About() {
   return (
     <div ref={container} className="relative w-full py-12 md:py-20 bg-white dark:bg-slate-950 overflow-hidden">
       
-      {/* Huge Background Scrolling Text */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none opacity-[0.03] dark:opacity-[0.08] z-0 flex items-center">
-        <h2 ref={bgTextRef} className="text-[20vw] font-black text-slate-900 dark:text-white whitespace-nowrap tracking-tighter leading-none">
-          DISCOVER THE STORY • DISCOVER THE STORY
-        </h2>
-      </div>
-
       <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-7xl relative z-10">
 
         <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
@@ -174,11 +155,11 @@ function About() {
           >
             <div className="space-y-4 mb-4 text-left w-full">
               <h3 className="about-item text-xs md:text-sm font-black uppercase tracking-[0.4em] text-blue-600">
-                Who is Ahmed?
+                Who is Byte Blade?
               </h3>
               <h2 className="about-item text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
                 About <br /> 
-                <span className="text-slate-400 dark:text-slate-600">Ahmed Raza</span>
+                <span className="text-slate-400 dark:text-slate-600">Byte Blade</span>
               </h2>
             </div>
 

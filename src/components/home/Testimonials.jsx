@@ -73,18 +73,6 @@ function Testimonials() {
       }
     );
 
-    // Massive Background Text Parallax
-    gsap.to(bgTextRef.current, {
-      xPercent: 20,
-      ease: "none",
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
-
   }, { scope: container });
 
   // Handle slide change animations
@@ -137,12 +125,6 @@ function Testimonials() {
   return (
     <div ref={container} className="relative w-full py-12 md:py-24 bg-white dark:bg-[#030712] overflow-hidden transition-colors">
       
-      {/* Huge Background Scrolling Text */}
-      <div className="absolute bottom-10 left-0 w-full pointer-events-none opacity-[0.03] dark:opacity-[0.08] z-0 flex items-center overflow-hidden">
-        <h2 ref={bgTextRef} className="text-[20vw] font-black text-slate-900 dark:text-white whitespace-nowrap tracking-tighter leading-none -translate-x-[20%]">
-          CLIENT STORIES • CLIENT STORIES
-        </h2>
-      </div>
 
       <div className="mx-auto w-[90%] md:w-[85%] max-w-7xl relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-24 items-start mt-4 md:mt-10">
         

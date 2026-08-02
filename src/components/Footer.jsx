@@ -1,4 +1,6 @@
 import { FiPhone, FiMail, FiFacebook, FiTwitter, FiLinkedin, FiInstagram, FiGithub, FiArrowUp } from "react-icons/fi";
+import logoFull from "../assets/logo-full.png";
+import logoDark from "../assets/logo-dark.png";
 
 function Footer() {
   const scrollToTop = () => {
@@ -16,10 +18,16 @@ function Footer() {
           {/* Brand & Socials */}
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black shadow-lg shadow-blue-600/20">
-                AR
-              </div>
-              <span className="text-lg font-black tracking-tighter shrink-0">Ahmed Raza <span className="text-blue-600">Dev</span></span>
+              <img
+                src={logoFull}
+                alt="ByteBlade Logo"
+                className="h-6 sm:h-7 object-contain block dark:hidden"
+              />
+              <img
+                src={logoDark}
+                alt="ByteBlade Logo"
+                className="h-6 sm:h-7 object-contain hidden dark:block"
+              />
             </div>
             
             <div className="flex gap-2">
@@ -34,7 +42,7 @@ function Footer() {
           {/* Copyright & Info */}
           <div className="flex flex-col md:flex-row items-center gap-6">
             <p className="text-slate-400 text-[9px] font-black uppercase tracking-[0.2em] opacity-80">
-              &copy; {new Date().getFullYear()} Ahmed Raza Dev
+              &copy; {new Date().getFullYear()} Byte Blade
             </p>
             
             <div className="h-4 w-[1px] bg-slate-200 dark:bg-white/10 hidden md:block"></div>

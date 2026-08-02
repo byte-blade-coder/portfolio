@@ -1,25 +1,32 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiClock, FiArrowUpRight, FiLayers } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiClock, FiArrowUpRight, FiLayers, FiSearch, FiCode } from "react-icons/fi";
+import Footer from "../components/Footer";
 
-import project2 from "../../assets/projects/dental-clinic.png";
-import projectSalon from "../../assets/projects/Zahra-Zakir.png";
-import projectElena from "../../assets/projects/Elena-Salon.png";
+import project2 from "../assets/projects/dental-clinic.png";
+import projectSalon from "../assets/projects/Zahra-Zakir.png";
+import projectElena from "../assets/projects/Elena-Salon.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Projects() {
+function ProjectsPage() {
   const container = useRef(null);
   const headerRef = useRef(null);
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   const projects = [
     {
       id: 1,
       title: "Zahra Zakir Salon",
       category: "WordPress • Custom Theme • Custom Plugin",
+      type: "WordPress",
       image: projectSalon,
       isComingSoon: false,
       liveLink: "https://zahrazakirsalon.com/",
@@ -29,6 +36,7 @@ function Projects() {
       id: 2,
       title: "Elena Salon",
       category: "WordPress • Custom Theme • CSS",
+      type: "WordPress",
       image: projectElena,
       isComingSoon: false,
       liveLink: "https://elena.ifree.page/",
@@ -38,6 +46,7 @@ function Projects() {
       id: 3,
       title: "Elara Dental Studio",
       category: "React • Tailwind • Vite",
+      type: "Web Apps",
       image: project2,
       isComingSoon: false,
       liveLink: "https://dental-clinic-theme.vercel.app/",
@@ -47,6 +56,7 @@ function Projects() {
       id: 4, 
       title: "Next-Gen SaaS Platform", 
       category: "React • Node.js • Cloud", 
+      type: "SaaS",
       isComingSoon: true,
       desc: "Currently crafting a highly scalable SaaS platform with smart integrations, real-time data processing capabilities, and interactive dashboard analytics."
     },
@@ -54,102 +64,101 @@ function Projects() {
       id: 5, 
       title: "Premium E-Commerce", 
       category: "Next.js • Tailwind • Headless", 
+      type: "Web Apps",
       isComingSoon: true,
       desc: "A completely custom headless e-commerce solution focusing on premium micro-interactions, headless checkout flow, and blazing fast performance."
     }
   ];
 
+  const filters = ["All", "Web Apps", "WordPress", "SaaS"];
+
+  const filteredProjects = activeFilter === "All" 
+    ? projects 
+    : projects.filter(p => p.type === activeFilter);
+
   useGSAP(() => {
-    // Scroll-scrubbed header reveal
+    // Header reveal
     gsap.fromTo(headerRef.current,
       { opacity: 0, y: 50 },
-      {
-        opacity: 1, y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        }
-      }
+      { opacity: 1, y: 0, duration: 1, ease: "power4.out" }
     );
 
-    // Grid cards reveal animation
-    const cards = gsap.utils.toArray(".project-card");
+    // Cards staggered reveal
+    const cards = gsap.utils.toArray(".project-card-detail");
     gsap.fromTo(cards,
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: ".projects-grid",
-          start: "top 80%",
-          toggleActions: "play none none none",
-        }
+      { opacity: 0, y: 40 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        stagger: 0.15, 
+        ease: "power3.out"
       }
     );
-  }, { scope: container });
+  }, { scope: container, dependencies: [activeFilter] });
 
   return (
-    <div ref={container} className="w-full py-20 md:py-32 bg-slate-50 dark:bg-slate-950 relative z-10 overflow-hidden">
+    <div ref={container} className="w-full bg-slate-50 dark:bg-slate-950 pt-32 relative z-10 overflow-hidden min-h-screen">
       
-      {/* Decorative Radial Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600/10 dark:bg-blue-600/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
+      {/* Decorative Radial Gradients */}
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-600/5 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
-      {/* Background Dot Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:5rem_5rem] pointer-events-none z-0" />
 
       <div className="mx-auto w-[90%] md:w-[85%] max-w-7xl relative z-10">
-
+        
         {/* Header */}
-        <div
-          ref={headerRef}
-          className="flex flex-col gap-3 mb-16 lg:mb-24 items-center text-center w-full"
-        >
-          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50">
-            <FiLayers className="text-blue-600 dark:text-blue-400 text-xs sm:text-sm animate-[pulse_2s_infinite]" />
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Featured Work</span>
-          </div>
-          
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
-            Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-300">Showcase.</span>
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg font-medium leading-relaxed">
-            A curated selection of applications highlighting custom architecture, premium user experience design, and robust performance.
+        <div ref={headerRef} className="flex flex-col gap-4 mb-16 text-center items-center">
+          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Our Portfolio</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
+            All <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-300">Projects.</span>
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg font-medium leading-relaxed mt-2">
+            Explore our complete registry of premium web products, responsive custom themes, and bespoke SaaS platforms.
           </p>
         </div>
 
-        {/* Modern Interactive Grid */}
-        <div className="projects-grid grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          {projects.slice(0, 4).map((project, index) => {
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 border ${
+                activeFilter === filter
+                  ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20"
+                  : "bg-white/60 dark:bg-[#0d1527]/50 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-slate-900"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24">
+          {filteredProjects.map((project) => {
             const techStack = project.category.split("•").map((tech) => tech.trim());
 
             return (
               <div 
                 key={project.id} 
-                className="project-card group relative flex flex-col justify-between bg-white/60 dark:bg-[#0d1527]/50 backdrop-blur-xl rounded-[2.5rem] border border-slate-200/60 dark:border-white/5 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_-25px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_-15px_rgba(13,148,136,0.12)] dark:hover:shadow-[0_25px_60px_-15px_rgba(13,148,136,0.15)] hover:border-blue-500/30 dark:hover:border-blue-400/20 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden"
+                className="project-card-detail group relative flex flex-col justify-between bg-white/60 dark:bg-[#0d1527]/50 backdrop-blur-xl rounded-[2.5rem] border border-slate-200/60 dark:border-white/5 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_-25px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_-15px_rgba(13,148,136,0.12)] dark:hover:shadow-[0_25px_60px_-15px_rgba(13,148,136,0.15)] hover:border-blue-500/30 dark:hover:border-blue-400/20 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden"
               >
-                
                 {/* Image & Interactive Hover Effect */}
                 <div className="p-4 w-full">
                   <div className={`relative w-full aspect-[16/10] overflow-hidden rounded-[2rem] bg-slate-100 dark:bg-slate-900/80 ${project.isComingSoon ? 'border border-dashed border-slate-200 dark:border-slate-800' : ''}`}>
                     {!project.isComingSoon ? (
                       <div className="absolute inset-0 w-full h-full">
-                        {/* Project Image */}
                         <img 
                           src={project.image} 
                           alt={project.title} 
                           className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
                         />
-                        {/* Elegant overlay screen tint */}
                         <div className="absolute inset-0 bg-slate-950/5 group-hover:bg-slate-950/0 transition-colors duration-500" />
                         
-                        {/* Quick View Interactive overlay */}
                         <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
                           <a 
                             href={project.liveLink} 
@@ -174,11 +183,9 @@ function Projects() {
                   </div>
                 </div>
 
-                {/* Text Content Block */}
+                {/* Text Content */}
                 <div className="px-8 pb-8 pt-4 flex flex-col justify-between flex-grow">
-                  
                   <div>
-                    {/* Dynamic Tech Chips */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {techStack.map((tech, i) => (
                         <span 
@@ -199,7 +206,6 @@ function Projects() {
                     </p>
                   </div>
 
-                  {/* Actions / Status */}
                   <div className="pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
                     {!project.isComingSoon ? (
                       <a 
@@ -217,29 +223,38 @@ function Projects() {
                       </span>
                     )}
                   </div>
-
                 </div>
-
               </div>
             );
           })}
         </div>
 
-        {/* View All Projects Button */}
-        <div className="flex justify-center mt-16 md:mt-24">
-          <Link 
-            to="/projects" 
-            className="group/btn relative flex items-center gap-3 px-10 py-5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs sm:text-sm uppercase tracking-widest hover:scale-105 transition-all duration-300 no-underline shadow-[0_10px_35px_-10px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/5"
-          >
-            <span>View All Projects</span>
-            <FiArrowUpRight size={18} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/10 to-teal-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
-          </Link>
+        {/* Bottom Home CTA */}
+        <div className="mb-24 p-8 md:p-16 rounded-[2.5rem] bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-700/80 dark:to-teal-600/80 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(255,255,255,0.08),transparent)] pointer-events-none" />
+          <div className="relative z-10 max-w-2xl text-left">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-none mb-4">
+              Have a custom project in mind?
+            </h2>
+            <p className="text-white/80 text-sm sm:text-base md:text-lg font-medium leading-relaxed">
+              We design and develop high-end SaaS applications, responsive dental studio profiles, and customizable booking dashboards.
+            </p>
+          </div>
+          <div className="relative z-10 shrink-0">
+            <Link 
+              to="/#cta" 
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-900 font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform duration-300 no-underline shadow-lg"
+            >
+              Get In Touch <FiArrowUpRight size={18} />
+            </Link>
+          </div>
         </div>
 
       </div>
+
+      <Footer />
     </div>
   );
 }
 
-export default Projects;
+export default ProjectsPage;

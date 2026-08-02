@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ThemeToggle from "./ThemeToggle";
 import { useAppReady } from '../context/AppReadyContext';
+import logoFull from "../assets/logo-full.png";
+import logoDark from "../assets/logo-dark.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,13 +18,14 @@ function Navbar() {
   const navRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const appReady = useAppReady();
   const navItemRefs = useRef({});
 
   const menuItems = [
     { name: "Home", path: "#hero" },
     { name: "Services", path: "#services" },
-    { name: "Projects", path: "#projects" },
+    { name: "Projects", path: "/projects" },
     { name: "Testimonials", path: "#testimonials" },
     { name: "About Us", path: "#about" },
     { name: "Contact", path: "#cta" },
@@ -30,67 +33,71 @@ function Navbar() {
 
   const handleNavClick = (e, path) => {
     e.preventDefault();
-    setActiveHash(path);
     setIsOpen(false);
     
-    const element = document.querySelector(path);
-    if (element) {
-      // Offset for navbar spacing
-      const offsetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-
-      // Reset animations for this section INSTANTLY so there is no glitch/flash
-      const triggers = ScrollTrigger.getAll();
-      triggers.forEach(trigger => {
-        if (trigger.trigger && (element.contains(trigger.trigger) || trigger.trigger === element)) {
-          if (trigger.animation) {
-            trigger.animation.progress(0).pause();
-          }
+    if (path.startsWith("/")) {
+      setActiveHash(path);
+      navigate(path);
+    } else {
+      if (location.pathname !== "/" && location.pathname !== "/home") {
+        setActiveHash(path);
+        navigate("/" + path);
+      } else {
+        setActiveHash(path);
+        const element = document.querySelector(path);
+        if (element) {
+          const offsetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
         }
-      });
-
-      // Play the animation after the smooth scroll completes (approx 600ms)
-      setTimeout(() => {
-        triggers.forEach(trigger => {
-          if (trigger.trigger && (element.contains(trigger.trigger) || trigger.trigger === element)) {
-            if (trigger.animation) {
-              trigger.animation.play();
-            }
-          }
-        });
-      }, 600);
+      }
     }
   };
 
-  // Simplified scroll tracking
+  // Optimized scroll tracking on homepage using ScrollTrigger.create (no empty tweens)
   useGSAP(() => {
+    if (location.pathname !== "/" && location.pathname !== "/home") return;
     const sections = document.querySelectorAll("section[id], div[id='hero']");
     
-    sections.forEach((section) => {
-      gsap.to(section, {
-        scrollTrigger: {
-          trigger: section,
-          start: "top center",
-          end: "bottom center",
-          onToggle: (self) => {
-            if (self.isActive) {
-              setActiveHash(`#${section.id}`);
-            }
+    const triggers = Array.from(sections).map((section) => {
+      return ScrollTrigger.create({
+        trigger: section,
+        start: "top 40%",
+        end: "bottom 40%",
+        onToggle: (self) => {
+          if (self.isActive) {
+            setActiveHash(`#${section.id}`);
           }
         }
       });
     });
-  }, []);
 
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
-    if (location.hash) {
+    if (location.pathname === "/projects") {
+      setActiveHash("/projects");
+    } else if (location.hash) {
       setActiveHash(location.hash);
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          const offsetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }, 100);
+      }
+    } else {
+      setActiveHash("#hero");
     }
-  }, [location.hash]);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -230,25 +237,23 @@ function Navbar() {
     <div className="fixed top-0 left-0 w-full pt-2 sm:pt-3 z-[100] px-2 sm:px-4">
       <nav
         ref={navRef}
-        className="mx-auto border border-gray-100 dark:border-slate-700/50 shadow-2xl bg-white/95 dark:bg-slate-900/80 backdrop-blur-md overflow-hidden w-full max-w-7xl rounded-[25px] sm:rounded-[35px]"
+        className="mx-auto border border-gray-100 dark:border-slate-800 shadow-2xl bg-white/95 dark:bg-[#0a0f1c] backdrop-blur-md dark:backdrop-blur-none overflow-hidden w-full max-w-7xl rounded-[25px] sm:rounded-[35px]"
       >
         <div className="px-3 sm:px-5 py-2 sm:py-2.5">
           <div className="flex justify-between items-center h-9 sm:h-10 md:h-12">
 
             {/* Logo Section */}
-            <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group cursor-pointer shrink-0">
-              <div
-                onMouseEnter={handleLogoHover}
-                onMouseLeave={handleLogoLeave}
-                className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-black text-xs sm:text-sm md:text-base shadow-lg"
-              >
-                AR
-              </div>
-              <div>
-                <h1 className="font-black tracking-tighter text-gray-900 dark:text-white text-xs sm:text-sm md:text-base lg:text-xl">
-                  Ahmed Raza <span className="text-blue-600">Dev</span>
-                </h1>
-              </div>
+            <Link to="/" className="flex items-center group cursor-pointer shrink-0">
+              <img
+                src={logoFull}
+                alt="ByteBlade Logo"
+                className="h-6 sm:h-7 md:h-9 object-contain group-hover:scale-[1.03] transition-transform duration-300 block dark:hidden"
+              />
+              <img
+                src={logoDark}
+                alt="ByteBlade Logo"
+                className="h-6 sm:h-7 md:h-9 object-contain group-hover:scale-[1.03] transition-transform duration-300 hidden dark:block"
+              />
             </Link>
 
             <div className="hidden md:flex lg:hidden items-center gap-1">

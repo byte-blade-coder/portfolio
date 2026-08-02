@@ -55,29 +55,11 @@ function Services() {
       }
     );
 
-    // Massive Background Text Parallax
-    gsap.to(bgTextRef.current, {
-      xPercent: 20,
-      ease: "none",
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
   }, { scope: container });
 
   return (
     <div ref={container} className="w-full pt-8 pb-16 md:pt-12 md:pb-24 relative z-10 overflow-hidden">
       
-      {/* Huge Background Scrolling Text */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none opacity-[0.03] dark:opacity-[0.08] z-0 flex items-center">
-        <h2 ref={bgTextRef} className="text-[30vw] md:text-[20vw] font-black text-slate-900 dark:text-white whitespace-nowrap tracking-tighter leading-none -translate-x-[20%]">
-          CORE EXPERTISE • CORE EXPERTISE
-        </h2>
-      </div>
-
       <div className="mx-auto w-[90%] md:w-[85%] max-w-7xl relative z-10">
         <h2
           ref={headingRef}

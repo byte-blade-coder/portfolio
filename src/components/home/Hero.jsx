@@ -153,9 +153,9 @@ const HeroSection = () => {
                 <div className="absolute animate-[spin_15s_linear_infinite] hidden lg:block w-[110px] h-[110px] opacity-50 pointer-events-none">
                   <svg viewBox="0 0 100 100" width="110" height="110" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <path id="circlePath" fill="none" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
-                    <text className="text-[10px] font-black uppercase tracking-[0.2em] fill-slate-900 dark:fill-white">
+                    <text className="text-[9px] font-black uppercase tracking-[0.2em] fill-slate-900 dark:fill-white">
                       <textPath href="#circlePath">
-                        AHMED RAZA • FULL STACK DEV •
+                        AHMED RAZA • BYTE BLADE FOUNDER •
                       </textPath>
                     </text>
                   </svg>
@@ -175,8 +175,12 @@ const HeroSection = () => {
                 Raza
               </span>
             </h1>
+            
+            <p className="gsap-item text-lg sm:text-2xl md:text-3xl font-black tracking-tight text-slate-700 dark:text-slate-300 mt-3 font-manrope uppercase">
+              Founder of <span className="text-blue-600 dark:text-blue-400">Byte Blade</span>
+            </p>
 
-            <p className="gsap-item mt-4 sm:mt-8 text-sm sm:text-xl text-slate-600 dark:text-slate-400 max-w-[280px] sm:max-w-lg font-medium leading-relaxed mx-auto lg:mx-0">
+            <p className="gsap-item mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-[280px] sm:max-w-lg font-medium leading-relaxed mx-auto lg:mx-0">
               Crafting high-performance digital experiences.
               Bridging the gap between <span className="text-slate-900 dark:text-white font-bold">Design</span> & <span className="text-slate-900 dark:text-white font-bold">Engineering</span>.
             </p>
