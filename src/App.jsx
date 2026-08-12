@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import AppRoutes from "./routes/AppRoutes";
 import ThemeCustomizer from "./components/ThemeCustomizer";
@@ -32,6 +33,7 @@ function App() {
           <AppRoutes />
           <ThemeCustomizer />
           <WhatsAppWidget />
+          <Analytics />
         </div>
       </AppReadyContext.Provider>
     </BrowserRouter>
