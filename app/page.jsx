@@ -1,20 +1,22 @@
+"use client";
+
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Hero from "../components/home/Hero";
-import Marquee from "../components/home/Marquee";
-import Services from "../components/home/Services";
-import LogoLoop from "../components/home/LogoLoop";
-import Projects from "../components/home/Projects";
-import Testimonials from "../components/home/Testimonials";
-import About from "../components/home/About";
-import CTA from "../components/home/CTA";
-import Footer from "../components/Footer";
+import Hero from "../src/components/home/Hero";
+import Marquee from "../src/components/home/Marquee";
+import Services from "../src/components/home/Services";
+import LogoLoop from "../src/components/home/LogoLoop";
+import Projects from "../src/components/home/Projects";
+import Testimonials from "../src/components/home/Testimonials";
+import About from "../src/components/home/About";
+import CTA from "../src/components/home/CTA";
+import Footer from "../src/components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Home() {
+export default function HomePage() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
@@ -22,17 +24,11 @@ function Home() {
     ScrollTrigger.refresh();
   }, { scope: containerRef });
 
-
-
-
-
-
   return (
     <div
       ref={containerRef}
       className="bg-white dark:bg-slate-950 relative overflow-x-hidden"
     >
-
       <section id="hero" className="min-h-screen">
         <Hero />
       </section>
@@ -67,6 +63,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
-

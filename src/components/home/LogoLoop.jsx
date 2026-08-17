@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { 
   SiNextdotjs, 
@@ -43,7 +45,7 @@ const LogoLoop = () => {
                 className="flex items-center justify-center text-slate-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors duration-300"
                 title={Logo.name}
               >
-                <Logo.icon className="w-10 h-10" />
+                <Logo.icon className="w-10 h-10" aria-label={Logo.name} />
               </div>
             ))}
           </div>
@@ -55,7 +57,7 @@ const LogoLoop = () => {
               className="flex items-center justify-center text-slate-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors duration-300"
               title={Logo.name}
             >
-              <Logo.icon className="w-10 h-10" />
+              <Logo.icon className="w-10 h-10" aria-hidden="true" />
             </div>
           ))}
           </div>

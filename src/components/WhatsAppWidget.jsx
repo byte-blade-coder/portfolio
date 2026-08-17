@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
@@ -16,11 +18,11 @@ const WhatsAppWidget = () => {
     >
       <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
       
-      <FaWhatsapp className="w-8 h-8 md:w-10 md:h-10 z-10" />
+      <FaWhatsapp className="w-8 h-8 md:w-10 md:h-10 z-10" aria-hidden="true" />
 
       {/* Tooltip on Hover */}
       <span className="absolute right-full mr-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap hidden md:block border border-slate-200 dark:border-white/10">
-        Let's Chat!
+        Let&apos;s Chat!
         {/* Triangle Arrow */}
         <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white dark:bg-slate-800 rotate-45 border-t border-r border-slate-200 dark:border-white/10"></div>
       </span>

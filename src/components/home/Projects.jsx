@@ -1,13 +1,17 @@
+"use client";
+
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiClock, FiArrowUpRight, FiLayers } from "react-icons/fi";
 
+import Image from "next/image";
 import project2 from "../../assets/projects/dental-clinic.png";
 import projectSalon from "../../assets/projects/Zahra-Zakir.png";
 import projectElena from "../../assets/projects/Elena-Salon.png";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,10 +145,11 @@ function Projects() {
                     {!project.isComingSoon ? (
                       <div className="absolute inset-0 w-full h-full">
                         {/* Project Image */}
-                        <img 
+                        <Image 
                           src={project.image} 
                           alt={project.title} 
-                          className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
+                          fill
+                          className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
                         />
                         {/* Elegant overlay screen tint */}
                         <div className="absolute inset-0 bg-slate-950/5 group-hover:bg-slate-950/0 transition-colors duration-500" />
@@ -228,7 +233,7 @@ function Projects() {
         {/* View All Projects Button */}
         <div className="flex justify-center mt-16 md:mt-24">
           <Link 
-            to="/projects" 
+            href="/projects" 
             className="group/btn relative flex items-center gap-3 px-10 py-5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs sm:text-sm uppercase tracking-widest hover:scale-105 transition-all duration-300 no-underline shadow-[0_10px_35px_-10px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/5"
           >
             <span>View All Projects</span>

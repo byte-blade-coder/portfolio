@@ -1,18 +1,20 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router-dom";
+import Image from "next/image";
+import Link from "next/link";
 import { FiClock, FiArrowUpRight, FiLayers, FiSearch, FiCode } from "react-icons/fi";
-import Footer from "../components/Footer";
-
-import project2 from "../assets/projects/dental-clinic.png";
-import projectSalon from "../assets/projects/Zahra-Zakir.png";
-import projectElena from "../assets/projects/Elena-Salon.png";
+import project2 from "../../src/assets/projects/dental-clinic.png";
+import projectSalon from "../../src/assets/projects/Zahra-Zakir.png";
+import projectElena from "../../src/assets/projects/Elena-Salon.png";
+import Footer from "../../src/components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectsPage() {
+export default function ProjectsPage() {
   const container = useRef(null);
   const headerRef = useRef(null);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -152,9 +154,10 @@ function ProjectsPage() {
                   <div className={`relative w-full aspect-[16/10] overflow-hidden rounded-[2rem] bg-slate-100 dark:bg-slate-900/80 ${project.isComingSoon ? 'border border-dashed border-slate-200 dark:border-slate-800' : ''}`}>
                     {!project.isComingSoon ? (
                       <div className="absolute inset-0 w-full h-full">
-                        <img 
+                        <Image 
                           src={project.image} 
                           alt={project.title} 
+                          fill
                           className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]" 
                         />
                         <div className="absolute inset-0 bg-slate-950/5 group-hover:bg-slate-950/0 transition-colors duration-500" />
@@ -242,7 +245,7 @@ function ProjectsPage() {
           </div>
           <div className="relative z-10 shrink-0">
             <Link 
-              to="/#cta" 
+              href="/#cta" 
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-900 font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform duration-300 no-underline shadow-lg"
             >
               Get In Touch <FiArrowUpRight size={18} />
@@ -256,5 +259,3 @@ function ProjectsPage() {
     </div>
   );
 }
-
-export default ProjectsPage;

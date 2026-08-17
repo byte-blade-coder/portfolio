@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -62,6 +64,7 @@ const ThemeCustomizer = () => {
             onMouseDown={(e) => gsap.to(e.currentTarget, { scale: 0.9, duration: 0.1 })}
             onMouseUp={(e) => gsap.to(e.currentTarget, { scale: 1.2, duration: 0.1 })}
             onClick={() => changeColor(color)}
+            aria-label={`Select ${color.name} theme`}
             className="w-8 h-8 rounded-full shadow-lg relative flex items-center justify-center transition-all border-2 border-transparent hover:border-white dark:hover:border-slate-400"
             style={{ backgroundColor: color[600] }}
             title={color.name}

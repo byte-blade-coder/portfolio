@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue-50: var(--primary-50);
+  --color-blue-100: var(--primary-50);
+  --color-blue-200: var(--primary-50);
+  --color-blue-300: var(--primary-400);
+  --color-blue-400: var(--primary-400);
+  --color-blue-500: var(--primary-600);
+  --color-blue-600: var(--primary-600);
+  --color-blue-700: var(--primary-600);
+  --color-blue-800: var(--primary-900);
+  --color-blue-900: var(--primary-900);
+  --color-blue-950: var(--primary-900);
+}
+
+:root {
+  --primary-600: #0d9488;
+  --primary-400: #2dd4bf;
+  --primary-50: #f0fdfa;
+  --primary-900: #134e4a;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+html,
+body {
+  font-family: var(--font-manrope), sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Single smooth theme transition on the root only */
+html {
+  transition: background-color 0.25s ease;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%,
+        100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%,
+        100% 100%, 0% 100%);
+  }
+}
+
+@keyframes wave2 {
+  0%,
+  100% {
+    clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%,
+        100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%,
+        100% 100%, 0% 100%);
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+
+.pause {
+  animation-play-state: running;
+  transition: animation-duration 0.5s ease;
+}
+
+.group:hover .animate-marquee,
+.group:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+/* Theme Toggle Animations */
+@keyframes starPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.5); }
+}
+
+@keyframes rayRotate {
+  from { transform: rotate(0deg) translateX(8px); }
+  to   { transform: rotate(360deg) translateX(8px); }
+}
+
+/* Legacy helper classes */
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+}
+
+.counter:hover {
+  border-color: var(--accent-border);
+}
+
+.counter:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

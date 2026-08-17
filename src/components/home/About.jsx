@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import heroImg from "../../assets/hero.png";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -129,9 +132,10 @@ function About() {
             ></div>
             
             <div className="relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-none aspect-[4/5] overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-2xl group">
-              <img 
+              <Image 
                 src={heroImg} 
                 alt="Ahmed Raza" 
+                fill
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110"
               />
               {/* Subtle Gradient Overlay */}

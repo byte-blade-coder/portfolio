@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -83,7 +85,7 @@ const CTA = () => {
             <div className="space-y-6">
               <h3 className="cta-info-item text-sm font-black uppercase tracking-[0.4em] text-[var(--primary-600)]">Get in Touch</h3>
               <h2 className="cta-info-item text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] text-left">
-                Let's build <br /> <span className="text-[var(--primary-600)]">your dream.</span>
+                Let&apos;s build <br /> <span className="text-[var(--primary-600)]">your dream.</span>
               </h2>
               <p className="cta-info-item text-slate-600 dark:text-slate-400 text-lg md:text-xl font-medium max-w-md leading-relaxed">
                 Have a project in mind? Looking for a partner to build something extraordinary? Send me a message.
@@ -120,20 +122,22 @@ const CTA = () => {
             <form className="relative bg-white/70 dark:bg-slate-900/50 backdrop-blur-3xl border border-slate-200 dark:border-white/10 rounded-[2rem] md:rounded-[2.5rem] pt-6 pb-4 md:pt-16 md:pb-12 px-6 md:px-12 space-y-2 md:space-y-6 shadow-2xl">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Name</label>
+                  <label htmlFor="contact-name" className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Name</label>
                   <input
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
+                    id="contact-name"
                     type="text"
                     placeholder="John Doe"
                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 rounded-2xl px-6 py-2.5 md:py-4 outline-none focus:border-[var(--primary-600)] focus:ring-1 focus:ring-[var(--primary-600)]/20 transition-all dark:text-white font-bold"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Email</label>
+                  <label htmlFor="contact-email" className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Email</label>
                   <input
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
+                    id="contact-email"
                     type="email"
                     placeholder="john@example.com"
                     className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 rounded-2xl px-6 py-2.5 md:py-4 outline-none focus:border-[var(--primary-600)] focus:ring-1 focus:ring-[var(--primary-600)]/20 transition-all dark:text-white font-bold"
@@ -142,10 +146,11 @@ const CTA = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Subject</label>
+                <label htmlFor="contact-subject" className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Subject</label>
                 <input
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
+                  id="contact-subject"
                   type="text"
                   placeholder="Project Inquiry"
                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 rounded-2xl px-6 py-2.5 md:py-4 outline-none focus:border-[var(--primary-600)] focus:ring-1 focus:ring-[var(--primary-600)]/20 transition-all dark:text-white font-bold"
@@ -153,10 +158,11 @@ const CTA = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Message</label>
+                <label htmlFor="contact-message" className="text-[10px] font-black uppercase tracking-widest text-[var(--primary-600)] ml-2">Message</label>
                 <textarea
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
+                  id="contact-message"
                   rows="3"
                   placeholder="Tell me about your project..."
                   className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 rounded-2xl px-6 py-2.5 md:py-4 outline-none focus:border-[var(--primary-600)] focus:ring-1 focus:ring-[var(--primary-600)]/20 transition-all dark:text-white resize-none font-bold"

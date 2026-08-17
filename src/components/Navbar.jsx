@@ -1,15 +1,19 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ThemeToggle from "./ThemeToggle";
-import { useAppReady } from '../context/AppReadyContext';
+import Image from "next/image";
 import logoFull from "../assets/logo-full.png";
 import logoDark from "../assets/logo-dark.png";
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +21,8 @@ function Navbar() {
   const [previousActive, setPreviousActive] = useState("#hero");
   const navRef = useRef(null);
   const mobileMenuRef = useRef(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const appReady = useAppReady();
+  const pathname = usePathname();
+  const router = useRouter();
   const navItemRefs = useRef({});
 
   const menuItems = [
@@ -37,11 +40,11 @@ function Navbar() {
     
     if (path.startsWith("/")) {
       setActiveHash(path);
-      navigate(path);
+      router.push(path);
     } else {
-      if (location.pathname !== "/" && location.pathname !== "/home") {
+      if (pathname !== "/" && pathname !== "/home") {
         setActiveHash(path);
-        navigate("/" + path);
+        router.push("/" + path);
       } else {
         setActiveHash(path);
         const element = document.querySelector(path);
@@ -58,7 +61,7 @@ function Navbar() {
 
   // Optimized scroll tracking on homepage using ScrollTrigger.create (no empty tweens)
   useGSAP(() => {
-    if (location.pathname !== "/" && location.pathname !== "/home") return;
+    if (pathname !== "/" && pathname !== "/home") return;
     const sections = document.querySelectorAll("section[id], div[id='hero']");
     
     const triggers = Array.from(sections).map((section) => {
@@ -77,31 +80,19 @@ function Navbar() {
     return () => {
       triggers.forEach((t) => t.kill());
     };
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
-    if (location.pathname === "/projects") {
+    if (pathname === "/projects") {
       setActiveHash("/projects");
-    } else if (location.hash) {
-      setActiveHash(location.hash);
-      const element = document.querySelector(location.hash);
-      if (element) {
-        setTimeout(() => {
-          const offsetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }, 100);
-      }
     } else {
       setActiveHash("#hero");
     }
-  }, [location.pathname, location.hash]);
+  }, [pathname]);
 
   useEffect(() => {
     setIsOpen(false);
-  }, [location]);
+  }, [pathname]);
 
 
 
@@ -243,16 +234,20 @@ function Navbar() {
           <div className="flex justify-between items-center h-9 sm:h-10 md:h-12">
 
             {/* Logo Section */}
-            <Link to="/" className="flex items-center group cursor-pointer shrink-0">
-              <img
+            <Link href="/" className="flex items-center group cursor-pointer shrink-0">
+              <Image
                 src={logoFull}
                 alt="ByteBlade Logo"
-                className="h-6 sm:h-7 md:h-9 object-contain group-hover:scale-[1.03] transition-transform duration-300 block dark:hidden"
+                height={36}
+                sizes="(max-width: 768px) 100px, 150px"
+                className="h-6 sm:h-7 md:h-9 w-auto object-contain group-hover:scale-[1.03] transition-transform duration-300 block dark:hidden"
               />
-              <img
+              <Image
                 src={logoDark}
                 alt="ByteBlade Logo"
-                className="h-6 sm:h-7 md:h-9 object-contain group-hover:scale-[1.03] transition-transform duration-300 hidden dark:block"
+                height={36}
+                sizes="(max-width: 768px) 100px, 150px"
+                className="h-6 sm:h-7 md:h-9 w-auto object-contain group-hover:scale-[1.03] transition-transform duration-300 hidden dark:block"
               />
             </Link>
 
@@ -317,9 +312,10 @@ function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 onMouseDown={handleLinkTap}
+                aria-label={isOpen ? "Close menu" : "Open menu"}
                 className="p-1.5 sm:p-2 text-gray-900 dark:text-white focus:outline-none flex items-center justify-center transition-transform"
               >
-                {isOpen ? <FiX size={20} sm:size={24} /> : <FiMenu size={20} sm:size={24} />}
+                {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
               </button>
             </div>
           </div>
@@ -327,12 +323,12 @@ function Navbar() {
           {/* Mobile Dropdown Menu */}
           <div
             ref={mobileMenuRef}
-            className="lg:hidden overflow-hidden"
+            className="md:hidden overflow-hidden"
             style={{ height: 0, opacity: 0 }}
           >
             <div className="flex flex-col gap-1.5 pb-3 sm:pb-4 mt-2 sm:mt-3 border-t border-gray-50 dark:border-slate-800 pt-3 sm:pt-4 px-1 sm:px-2">
               {menuItems.map((item) => {
-                const isActive = location.hash === item.path || (!location.hash && item.path === "#hero");
+                const isActive = activeHash === item.path;
                 return (
                   <div key={item.name} className="mobile-link">
                     <a

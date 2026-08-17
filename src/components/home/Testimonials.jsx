@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -142,19 +144,21 @@ function Testimonials() {
               </span>
             </h2>
             <p className="t-header text-slate-600 dark:text-slate-400 mt-6 text-lg font-medium max-w-sm leading-relaxed">
-              Real feedback from the incredible people and visionary massive brands I've had the pleasure to work with.
+              Real feedback from the incredible people and visionary massive brands I&apos;ve had the pleasure to work with.
             </p>
           </div>
 
           <div className="t-header flex items-center gap-4 mt-4">
             <button 
               onClick={prevSlide}
+              aria-label="Previous slide"
               className="w-14 h-14 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:scale-110 transition-all duration-300 backdrop-blur-md"
             >
               <ArrowLeft size={20} />
             </button>
             <button 
               onClick={nextSlide}
+              aria-label="Next slide"
               className="w-14 h-14 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:scale-110 transition-all duration-300 backdrop-blur-md"
             >
               <ArrowRight size={20} />

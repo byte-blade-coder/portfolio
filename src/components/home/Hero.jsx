@@ -1,29 +1,27 @@
+"use client";
+
 import React, { useRef, forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ArrowUpRight, Sparkles, Send } from 'lucide-react';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
+import Image from "next/image";
 import heroImg from "../../assets/hero.png";
-import { useAppReady } from '../../context/AppReadyContext';
 
 // Optimized image component
 const OptimizedHeroImage = forwardRef(({ className }, ref) => {
   return (
-    <img
+    <Image
       ref={ref}
       src={heroImg}
       alt="Ahmed Raza"
       className={className}
-      loading="eager"
-      decoding="async"
-      style={{
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden'
-      }}
+      priority
+      sizes="(max-width: 640px) 240px, (max-width: 768px) 250px, (max-width: 1024px) 350px, (max-width: 1280px) 400px, 500px"
     />
   );
 });
+OptimizedHeroImage.displayName = "OptimizedHeroImage";
 
 const HeroSection = () => {
   const container = useRef(null);
@@ -34,25 +32,18 @@ const HeroSection = () => {
   const imageRef = useRef(null);
   const mobileDockRef = useRef(null);
 
-  const appReady = useAppReady();
-
   useGSAP(() => {
-    // Only run entrance animations once the loader has exited
-    if (!appReady) return;
-
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
     // Entrance Animation
-    tl.fromTo(container.current, { opacity: 0 }, { opacity: 1, duration: 1 })
-      .from(".gsap-item", {
+    tl.from(".gsap-item", {
         opacity: 0,
         y: 30,
         stagger: 0.15,
         duration: 1,
-      }, "-=0.5")
+      })
       .from(imageRef.current, {
-        opacity: 0,
-        scale: 0.8,
+        scale: 0.95,
         duration: 1.5,
       }, "-=1")
       .from(mobileDockRef.current, {
@@ -85,7 +76,7 @@ const HeroSection = () => {
       });
 
     }
-  }, { scope: container, dependencies: [appReady] });
+  }, { scope: container });
 
   // Optimized hover handlers with throttling
   const handleHover = (e, scale = 1.05, shadow = true) => {
@@ -198,7 +189,7 @@ const HeroSection = () => {
                 style={{ backgroundColor: 'var(--primary-600)' }}
                 className="px-6 sm:px-8 py-3 sm:py-4 text-white rounded-2xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/20 hover:shadow-2xl"
               >
-                Hire Me <Send size={16} sm:size={18} />
+                Hire Me <Send size={17} />
               </button>
               <button
                 onMouseEnter={(e) => handleHover(e, 1.05, false)}
@@ -206,14 +197,13 @@ const HeroSection = () => {
                 onMouseDown={handleTap}
                 className="px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl font-bold flex items-center gap-2 transition-all hover:border-[var(--primary-600)]"
               >
-                Portfolio <ArrowUpRight size={16} sm:size={18} />
+                Portfolio <ArrowUpRight size={17} />
               </button>
             </div>
 
-            {/* SOCIAL LINKS */}
-            <div className="gsap-item mt-8 sm:mt-12 flex items-center justify-center lg:justify-start gap-4 sm:gap-6 opacity-80 hover:opacity-100 transition-all duration-500">
-              <a href="#" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiGithub size={24} sm:size={28} /></a>
-              <a href="#" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiLinkedin size={24} sm:size={28} /></a>
+            <div className="gsap-item mt-8 sm:mt-12 flex items-center justify-center lg:justify-start gap-4 sm:gap-6">
+              <a href="#" aria-label="GitHub" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiGithub size={26} /></a>
+              <a href="#" aria-label="LinkedIn" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiLinkedin size={26} /></a>
               <div className="h-px w-8 sm:w-12 bg-slate-300 dark:bg-slate-700"></div>
               <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">IT Technician</span>
             </div>
@@ -252,14 +242,14 @@ const HeroSection = () => {
             style={{ backgroundColor: 'var(--primary-600)' }}
             className="w-full py-3 sm:py-4 text-white font-black rounded-[1rem] sm:rounded-[1.5rem] flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 text-sm sm:text-base"
           >
-            Hire Me Now <Send size={16} sm:size={18} />
+            Hire Me Now <Send size={17} />
           </button>
           <button
             onMouseDown={handleTap}
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="w-full py-2.5 sm:py-3 bg-transparent text-slate-900 dark:text-white font-bold flex items-center justify-center gap-2 text-sm sm:text-base"
           >
-            View Portfolio <ArrowUpRight size={16} sm:size={18} className="opacity-50" />
+            View Portfolio <ArrowUpRight size={17} className="opacity-50" />
           </button>
         </div>
       </div>

@@ -1,4 +1,7 @@
+"use client";
+
 import { FiPhone, FiMail, FiFacebook, FiTwitter, FiLinkedin, FiInstagram, FiGithub, FiArrowUp } from "react-icons/fi";
+import Image from "next/image";
 import logoFull from "../assets/logo-full.png";
 import logoDark from "../assets/logo-dark.png";
 
@@ -18,21 +21,30 @@ function Footer() {
           {/* Brand & Socials */}
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center gap-3">
-              <img
+              <Image
                 src={logoFull}
                 alt="ByteBlade Logo"
-                className="h-6 sm:h-7 object-contain block dark:hidden"
+                height={28}
+                sizes="(max-width: 768px) 80px, 120px"
+                className="h-6 sm:h-7 w-auto object-contain block dark:hidden"
               />
-              <img
+              <Image
                 src={logoDark}
                 alt="ByteBlade Logo"
-                className="h-6 sm:h-7 object-contain hidden dark:block"
+                height={28}
+                sizes="(max-width: 768px) 80px, 120px"
+                className="h-6 sm:h-7 w-auto object-contain hidden dark:block"
               />
             </div>
             
             <div className="flex gap-2">
-              {[FiGithub, FiLinkedin, FiTwitter, FiInstagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all duration-300 group">
+              {[
+                { Icon: FiGithub, label: "GitHub" },
+                { Icon: FiLinkedin, label: "LinkedIn" },
+                { Icon: FiTwitter, label: "Twitter" },
+                { Icon: FiInstagram, label: "Instagram" }
+              ].map(({ Icon, label }, i) => (
+                <a key={i} href="#" aria-label={label} className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all duration-300 group">
                   <Icon size={14} className="transition-transform group-hover:scale-110" />
                 </a>
               ))}

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -25,8 +25,8 @@ export default {
         }
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        manrope: ['Manrope', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
       },
     },
   },
