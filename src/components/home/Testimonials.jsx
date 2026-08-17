@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -78,7 +78,7 @@ function Testimonials() {
   }, { scope: container });
 
   // Handle slide change animations
-  const changeSlide = (newIndex) => {
+  const changeSlide = useCallback((newIndex) => {
     if (isAnimating || newIndex === activeIndex) return;
     setIsAnimating(true);
 
@@ -100,7 +100,7 @@ function Testimonials() {
 
     // The state updates here via onComplete, wait a tiny bit then fade new one in
     // This is handled by a useEffect reacting to activeIndex
-  };
+  }, [isAnimating, activeIndex]);
 
   useEffect(() => {
     if (textRef.current && !isAnimating) {
@@ -119,7 +119,7 @@ function Testimonials() {
       }
     }, 5000);
     return () => clearInterval(autoLoop);
-  }, [activeIndex, isAnimating]);
+  }, [activeIndex, isAnimating, changeSlide]);
 
   const nextSlide = () => changeSlide((activeIndex + 1) % testimonials.length);
   const prevSlide = () => changeSlide((activeIndex - 1 + testimonials.length) % testimonials.length);
@@ -139,7 +139,7 @@ function Testimonials() {
             </h3>
             <h2 className="t-header text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9] text-left">
               Client<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-600">
+              <span className="text-[var(--primary-600)]">
                 Stories.
               </span>
             </h2>
@@ -185,8 +185,7 @@ function Testimonials() {
         {/* Right Side: Dynamic Interactive Display */}
         <div className="w-full lg:w-2/3 relative min-h-[320px] sm:min-h-[400px] flex items-start pt-0 lg:pt-1">
           
-          {/* Animated Glow Behind Text */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-gradient-to-tr ${activeTestimonial.color} opacity-5 blur-[120px] rounded-full transition-colors duration-1000 -z-10`} />
+
 
           <div className="relative w-full">
             {/* Stars */}

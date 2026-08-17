@@ -1,6 +1,6 @@
 "use client";
 
-import { FiPhone, FiMail, FiFacebook, FiTwitter, FiLinkedin, FiInstagram, FiGithub, FiArrowUp } from "react-icons/fi";
+import { FiPhone, FiMail, FiFacebook, FiLinkedin, FiInstagram, FiGithub, FiArrowUp } from "react-icons/fi";
 import Image from "next/image";
 import logoFull from "../assets/logo-full.png";
 import logoDark from "../assets/logo-dark.png";
@@ -12,9 +12,7 @@ function Footer() {
 
   return (
     <footer className="relative bg-white dark:bg-[#030712] text-slate-900 dark:text-white py-8 border-t border-slate-100 dark:border-white/5 overflow-hidden">
-      {/* Decorative Background Element */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-600/5 blur-[80px] rounded-full pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           
@@ -39,12 +37,12 @@ function Footer() {
             
             <div className="flex gap-2">
               {[
-                { Icon: FiGithub, label: "GitHub" },
-                { Icon: FiLinkedin, label: "LinkedIn" },
-                { Icon: FiTwitter, label: "Twitter" },
-                { Icon: FiInstagram, label: "Instagram" }
-              ].map(({ Icon, label }, i) => (
-                <a key={i} href="#" aria-label={label} className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all duration-300 group">
+                { Icon: FiGithub, label: "GitHub", href: "https://github.com/byte-blade-coder" },
+                { Icon: FiLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/ahmed-raza-05b89a30a" },
+                { Icon: FiFacebook, label: "Facebook", href: "https://www.facebook.com/people/Byte-Blade/61593103071784/" },
+                { Icon: FiInstagram, label: "Instagram", href: "https://www.instagram.com/blade.byte/" }
+              ].map(({ Icon, label, href }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 transition-all duration-300 group">
                   <Icon size={14} className="transition-transform group-hover:scale-110" />
                 </a>
               ))}

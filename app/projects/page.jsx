@@ -102,20 +102,15 @@ export default function ProjectsPage() {
   return (
     <div ref={container} className="w-full bg-slate-50 dark:bg-slate-950 pt-32 relative z-10 overflow-hidden min-h-screen">
       
-      {/* Decorative Radial Gradients */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 dark:bg-blue-600/5 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:5rem_5rem] pointer-events-none z-0" />
 
       <div className="mx-auto w-[90%] md:w-[85%] max-w-7xl relative z-10">
         
         {/* Header */}
         <div ref={headerRef} className="flex flex-col gap-4 mb-16 text-center items-center">
-          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Our Portfolio</span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
-            All <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-300">Projects.</span>
+          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-[var(--primary-600)]">Our Portfolio</span>
+          <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
+            All <span className="text-[var(--primary-600)]">Projects.</span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg font-medium leading-relaxed mt-2">
             Explore our complete registry of premium web products, responsive custom themes, and bespoke SaaS platforms.

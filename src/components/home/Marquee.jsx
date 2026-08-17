@@ -3,11 +3,6 @@
 import React from "react";
 
 const Marquee = () => {
-  const row1 = [
-    "REACT", "NEXT.JS", "NODE.JS", "LARAVEL", "WORDPRESS", "MOBILE APPS",
-    "REACT", "NEXT.JS", "NODE.JS", "LARAVEL", "WORDPRESS", "MOBILE APPS"
-  ];
-
   const row2 = [
     "BUILD", "SCALE", "DESIGN", "OPTIMIZE", "FAST", "SECURE",
     "BUILD", "SCALE", "DESIGN", "OPTIMIZE", "FAST", "SECURE"
@@ -20,30 +15,6 @@ const Marquee = () => {
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-[#030712] to-transparent z-10 pointer-events-none" />
 
       <div className="flex flex-col gap-6 md:gap-10">
-        {/* Row 1: Right to Left */}
-        <div className="flex overflow-hidden group select-none">
-          <div className="flex items-center gap-12 whitespace-nowrap animate-marquee group-hover:pause">
-            {row1.map((tech, i) => (
-              <div key={i} className="flex items-center gap-12">
-                <span className="text-[clamp(2.5rem,8vw,5rem)] font-black tracking-tighter text-slate-900 dark:text-white opacity-40 dark:opacity-60 hover:opacity-100 dark:hover:opacity-100 transition-opacity duration-500 cursor-default">
-                  {tech}
-                </span>
-                <span className="text-blue-600 text-3xl md:text-5xl">•</span>
-              </div>
-            ))}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex items-center gap-12 whitespace-nowrap animate-marquee group-hover:pause" aria-hidden="true">
-            {row1.map((tech, i) => (
-              <div key={i} className="flex items-center gap-12">
-                <span className="text-[clamp(2.5rem,8vw,5rem)] font-black tracking-tighter text-slate-900 dark:text-white opacity-40 dark:opacity-60 hover:opacity-100 dark:hover:opacity-100 transition-opacity duration-500 cursor-default">
-                  {tech}
-                </span>
-                <span className="text-blue-600 text-3xl md:text-5xl">•</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Row 2: Left to Right */}
         <div className="flex overflow-hidden group select-none">

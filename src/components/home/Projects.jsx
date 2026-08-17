@@ -101,27 +101,22 @@ function Projects() {
   return (
     <div ref={container} className="w-full py-20 md:py-32 bg-slate-50 dark:bg-slate-950 relative z-10 overflow-hidden">
       
-      {/* Decorative Radial Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600/10 dark:bg-blue-600/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
-      {/* Background Dot Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       <div className="mx-auto w-[90%] md:w-[85%] max-w-7xl relative z-10">
 
         {/* Header */}
         <div
           ref={headerRef}
-          className="flex flex-col gap-3 mb-16 lg:mb-24 items-center text-center w-full"
+          className="flex flex-col gap-3 mb-16 lg:mb-24 items-start text-left w-full"
         >
           <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50">
             <FiLayers className="text-blue-600 dark:text-blue-400 text-xs sm:text-sm animate-[pulse_2s_infinite]" />
             <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Featured Work</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
-            Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-300">Showcase.</span>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
+            Creative <span className="text-[var(--primary-600)]">Showcase.</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg font-medium leading-relaxed">
             A curated selection of applications highlighting custom architecture, premium user experience design, and robust performance.

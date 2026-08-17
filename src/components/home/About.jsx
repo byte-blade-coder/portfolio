@@ -201,12 +201,7 @@ function About() {
         </div>
       </div>
 
-      {/* Background Decorative Accent */}
-      <div 
-        ref={bgAccentRef}
-        className="absolute top-1/2 -right-20 w-64 h-64 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" 
-        style={{ opacity: 0.05 }}
-      />
+
     </div>
   );
 }

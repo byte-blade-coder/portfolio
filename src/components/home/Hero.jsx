@@ -115,22 +115,7 @@ const HeroSection = () => {
       id="hero"
       className="relative w-full min-h-[100svh] bg-slate-50 dark:bg-[#030712] flex items-center justify-center overflow-hidden pt-24 sm:pt-28 md:pt-24 lg:pt-20 pb-20 lg:pb-0"
     >
-      {/* --- PREMIUM BACKGROUND ELEMENTS --- */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-          style={{ backgroundImage: `url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E')` }}
-        ></div>
 
-        <div
-          ref={blob1Ref}
-          className="absolute top-[10%] right-[10%] w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] bg-blue-400/20 dark:bg-blue-600/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full"
-        />
-        <div
-          ref={blob2Ref}
-          className="absolute bottom-[10%] left-[20%] w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[500px] md:h-[500px] bg-purple-400/10 dark:bg-indigo-600/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full"
-        />
-      </div>
 
       <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[80%] max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-10 lg:gap-14 px-4 sm:px-6 md:px-12 lg:px-16">
         <div className="flex flex-col lg:flex-row items-center justify-center w-full gap-4 sm:gap-8 lg:gap-16">
@@ -202,8 +187,8 @@ const HeroSection = () => {
             </div>
 
             <div className="gsap-item mt-8 sm:mt-12 flex items-center justify-center lg:justify-start gap-4 sm:gap-6">
-              <a href="#" aria-label="GitHub" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiGithub size={26} /></a>
-              <a href="#" aria-label="LinkedIn" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiLinkedin size={26} /></a>
+              <a href="https://github.com/byte-blade-coder" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiGithub size={26} /></a>
+              <a href="https://www.linkedin.com/in/ahmed-raza-05b89a30a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiLinkedin size={26} /></a>
               <div className="h-px w-8 sm:w-12 bg-slate-300 dark:bg-slate-700"></div>
               <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">IT Technician</span>
             </div>
