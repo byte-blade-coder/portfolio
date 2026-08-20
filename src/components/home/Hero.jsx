@@ -189,8 +189,8 @@ const HeroSection = () => {
             <div className="gsap-item mt-8 sm:mt-12 flex items-center justify-center lg:justify-start gap-4 sm:gap-6">
               <a href="https://github.com/byte-blade-coder" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiGithub size={26} /></a>
               <a href="https://www.linkedin.com/in/ahmed-raza-05b89a30a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-slate-700 dark:text-slate-300 hover:text-[var(--primary-600)] transition-colors"><FiLinkedin size={26} /></a>
-              <div className="h-px w-8 sm:w-12 bg-slate-300 dark:bg-slate-700"></div>
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">IT Technician</span>
+              <div className="hidden sm:block h-px w-8 sm:w-12 bg-slate-300 dark:bg-slate-700"></div>
+              <span className="hidden sm:inline text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">IT Technician</span>
             </div>
           </div>
 
